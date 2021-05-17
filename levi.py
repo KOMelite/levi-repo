@@ -9,7 +9,7 @@ def convert_pdf_to_dataframe(bank_document):
 
     print("\n                  Analyzing Bank Document...")
 
-    columns = ['50, 400, 480, 563']
+    columns_separators = ['50, 400, 480, 563']
     try:
         tables = camelot.read_pdf(bank_document,
                                   pages="2-end",
@@ -17,7 +17,7 @@ def convert_pdf_to_dataframe(bank_document):
                                   suppress_stdout=True,
                                   multiple_sheets=True,
                                   edge_tol=500,
-                                  columns=columns)
+                                  columns=columns_separators)
 
         # .df is a property of TableList objects (Convert table to dataframe)
         data_frames = [table.df for table in tables]
