@@ -1,0 +1,6 @@
+Add backwards compatability for bank documents where year <= March 2021.
+Add a GUI element.
+Add Classes if needed.
+
+
+
