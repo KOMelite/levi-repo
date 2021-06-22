@@ -1,24 +1,37 @@
 import camelot
 import sys
-
 import pandas as pd
 
 
 def convert_pdf_to_dataframe(bank_document):
+    # TODO add backwards compatibility where year <= March 2021
     print("\n\t\tAnalyzing Bank Document...")
 
-    column_separators = ['50, 400, 480, 563']
+    columns = ['35, 410, 492, 560']
+    table_areas = ['11, 417, 582, 173']
     try:
+        first_page = camelot.read_pdf(bank_document,
+                                      pages="1",
+                                      flavor="stream",
+                                      suppress_stdout=True,
+                                      edge_tol=500,
+                                      split_text=True,
+                                      columns=columns,
+                                      table_areas=table_areas)
+
         tables = camelot.read_pdf(bank_document,
                                   pages="2-end",
                                   flavor="stream",
                                   suppress_stdout=True,
-                                  multiple_sheets=True,
                                   edge_tol=500,
-                                  columns=column_separators)
+                                  split_text=True,
+                                  columns=columns)
 
-        # .df is a property of TableList objects (Convert table to dataframe)
+        # .df attribute of TableList objects that converts to DataFrame
+        first_dataframe_page = first_page[0].df
         data_frames = [table.df for table in tables]
+
+        data_frames.insert(0, first_dataframe_page)
         return pd.concat(data_frames)
 
     except FileNotFoundError:

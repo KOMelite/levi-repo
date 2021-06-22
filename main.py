@@ -25,7 +25,6 @@ if __name__ == '__main__':
 
     df = convert_pdf_to_dataframe(bank_pdf)
 
-    df = df.iloc[2:].copy()  # Removes the first 3 lines from dataframe
     df.dropna(how='any', inplace=True)
     df.rename({0: "Dates"}, axis=1, inplace=True)
 
@@ -51,7 +50,7 @@ if __name__ == '__main__':
             inplace=True)
 
     df["AMOUNT"] = [row.replace(",", "") for row in df["AMOUNT"]]
-
+    print("Unnecessary")
     credit, debit = separate_credit_from_debit(dataframe=df,
                                                column_name=df["AMOUNT"])
     credit["AMOUNT"] = [row.replace("Cr", "") for row in credit["AMOUNT"]]
