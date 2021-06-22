@@ -1,8 +1,5 @@
 #bytecode cache files
 __pycache__
 
-# Icon image
-*.ico
-
 #File
 ignore
