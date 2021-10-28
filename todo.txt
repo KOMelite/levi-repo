@@ -1,7 +1,0 @@
-- Add doc strings to functions!!!
-- Add backwards compatability for bank documents where year <= March 2021.
-- Add a GUI element.
-- Add Classes to expand project including other banks other than FNB.
-- Format code (always)
-
-
