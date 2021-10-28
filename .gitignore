@@ -1,5 +1,6 @@
 #bytecode cache files
 __pycache__
+.idea/
 
 #File
-ignore
+ignore/
