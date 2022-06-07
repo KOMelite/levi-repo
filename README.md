@@ -10,4 +10,10 @@
 - Application is not ready for distrubution.
 - Application not user friendly.
 - Lots of reformating still required as well as addition of doc strings to functions...
-  addition of classes, tests, and setup files...
+  addition of classes, tests, and setup files...  
+
+--- 
+
+### Dependencies:
+1. camelot - pip install "camelot-py[base]"  
+2. pandas - pip install pandas
