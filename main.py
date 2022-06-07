@@ -50,7 +50,7 @@ if __name__ == '__main__':
             inplace=True)
 
     df["AMOUNT"] = [row.replace(",", "") for row in df["AMOUNT"]]
-    print("Unnecessary")
+    
     credit, debit = separate_credit_from_debit(dataframe=df,
                                                column_name=df["AMOUNT"])
     credit["AMOUNT"] = [row.replace("Cr", "") for row in credit["AMOUNT"]]
