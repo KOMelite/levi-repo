@@ -10,27 +10,31 @@ from levi import (
     calculate_exclusive_vat,
 )
 
-from util import prompt_file_path, determine_year, check_column_merged
+from util import get_file_name, determine_year, check_column_merged
 
 import tkinter as tk
 from tkinter import filedialog
 
 import os
+import sys
+import shutil
 
 if __name__ == "__main__":
     root = tk.Tk()
     root.withdraw()
 
+    excel_template = os.path.join(os.getcwd(), "template_001.xlsx")
+
     bank_pdf = filedialog.askopenfilename(title="Bank PDF Document", filetypes=[("PDF files", "*.pdf")])
     if not bank_pdf:
         raise ValueError("No bank PDF file selected")
+    file_name = get_file_name(bank_pdf)
 
     get_dir = os.path.dirname
-    parent_dir = get_dir(get_dir(get_dir(bank_pdf)))
-    excel = filedialog.askopenfilename(title="Excel Document", initialdir=parent_dir)
-    if not excel:
-        raise ValueError("No excel file selected")
-        
+    pdf_dir = get_dir(bank_pdf)
+
+    excel = shutil.copyfile(excel_template, os.path.join(pdf_dir, file_name + ".xlsx"))
+    
     year = determine_year()
 
     df = convert_pdf_to_dataframe(bank_pdf)
