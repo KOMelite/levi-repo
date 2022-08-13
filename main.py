@@ -12,12 +12,25 @@ from levi import (
 
 from util import prompt_file_path, determine_year, check_column_merged
 
+import tkinter as tk
+from tkinter import filedialog
+
+import os
 
 if __name__ == "__main__":
+    root = tk.Tk()
+    root.withdraw()
 
-    bank_pdf = prompt_file_path("Bank PDF Document")
-    excel = prompt_file_path("EXCEL")
+    bank_pdf = filedialog.askopenfilename(title="Bank PDF Document", filetypes=[("PDF files", "*.pdf")])
+    if not bank_pdf:
+        raise ValueError("No bank PDF file selected")
 
+    get_dir = os.path.dirname
+    parent_dir = get_dir(get_dir(get_dir(bank_pdf)))
+    excel = filedialog.askopenfilename(title="Excel Document", initialdir=parent_dir)
+    if not excel:
+        raise ValueError("No excel file selected")
+        
     year = determine_year()
 
     df = convert_pdf_to_dataframe(bank_pdf)
