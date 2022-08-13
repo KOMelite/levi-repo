@@ -1,16 +1,9 @@
 from datetime import datetime
+import os
 
 
-def prompt_file_path(file_type: str):
-    path = input(fr"{file_type} file path: ").strip('"')
-    if valid_path(path):
-        return path
-
-
-# TODO add functionality to validate path
-def valid_path(path):
-    return True
-
+def get_file_name(src):
+        return os.path.split(src)[1].split('.')[0]
 
 def determine_year():
     while True:
