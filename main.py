@@ -23,17 +23,16 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.withdraw()
 
-    excel_template = os.path.join(os.getcwd(), "template_001.xlsx")
-
     bank_pdf = filedialog.askopenfilename(title="Bank PDF Document", filetypes=[("PDF files", "*.pdf")])
     if not bank_pdf:
         raise ValueError("No bank PDF file selected")
-    file_name = get_file_name(bank_pdf)
+    
 
-    get_dir = os.path.dirname
-    pdf_dir = get_dir(bank_pdf)
+    pdf_dir = os.path.dirname(bank_pdf)
+    excel_template = os.path.join(os.getcwd(), "template_001.xlsx")
+    excel_new_name = get_file_name(bank_pdf)  + ".xlsx"
 
-    excel = shutil.copyfile(excel_template, os.path.join(pdf_dir, file_name + ".xlsx"))
+    excel = shutil.copyfile(excel_template, os.path.join(pdf_dir, excel_new_name))
     
     year = determine_year()
 
